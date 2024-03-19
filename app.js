@@ -33,13 +33,11 @@ app.use('/api/v1/jobs', jobsRouter)
 app.use(notFound)
 app.use(errorHandlerMiddleware)
 /*
-
-
-/*
 ####   Starting app     ####   */
 
 const start = async () => {
     try {
+        // well
         await connectionDB(process.env.MONGO_URI)
         app.listen(PORT, () =>
             console.log(`Server is listening on port: ${PORT}`)

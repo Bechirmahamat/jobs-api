@@ -1,5 +1,5 @@
 const User = require('../Models/User')
-
+const bcrypt = require('bcryptjs')
 const login = (req, res) => {
     res.send('Login login')
 }
