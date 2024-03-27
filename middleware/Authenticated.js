@@ -12,7 +12,6 @@ const auth = async (req, res, next) => {
     const token = authorization.split(' ')[1]
     try {
         const payload = jwt.verify(token, process.env.JWT_TOKEN_SECRET_KEY)
-
         req.user = { userId: payload.id, name: payload.name }
 
         next()
