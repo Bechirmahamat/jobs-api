@@ -6,14 +6,21 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     }
 
     if (err.code && err.code === 11000) {
-        customError.message = `Email already exist.Please try with another account`
+        customError.message = `Email already token. Please try with another email`
         customError.statusCode = 400
     }
     if (err.name === 'ValidationError') {
+        customError.message = Object.values(err.errors)
+            .map((item) => item.message)
+            .join('. ')
         customError.statusCode = 400
     }
     if (err instanceof CustomAPIError) {
         return res.status(err.statusCode).json({ msg: err.message })
+    }
+    if (err.name === 'CastError') {
+        customError.message = `No item found with id: ${err.value}`
+        customError.statusCode = 404
     }
     return res.status(customError.statusCode).json({ msg: customError.message })
 }

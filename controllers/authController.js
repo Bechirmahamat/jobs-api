@@ -16,7 +16,13 @@ const login = async (req, res) => {
         throw new CustomAPIError('Invalid Credentials', 401)
     }
     res.status(201).json({
-        user: { id: user._id, username: user.name, email: user.email },
+        user: {
+            id: user._id,
+            username: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+        },
         token: user.createTOKEN(),
     })
 }
@@ -24,7 +30,13 @@ const login = async (req, res) => {
 const register = async (req, res) => {
     const user = await User.create({ ...req.body })
     res.status(201).json({
-        user: { id: user._id, username: user.name, email: user.email },
+        user: {
+            id: user._id,
+            username: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+        },
         token: user.createTOKEN(),
     })
 }
